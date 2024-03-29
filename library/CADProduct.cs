@@ -16,26 +16,30 @@ namespace library
             // Constructor: inicializa la cadena de conexión de la BD
             connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True";
         }
-
-    public bool Create(ENProduct en)
+        // Método para crear un nuevo producto en la base de datos
+        public bool Create(ENProduct en)
         {
             try
             {
+                // Abre una conexión a la base de datos y ejecuta una consulta SQL INSERT
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     string query = "INSERT INTO Products (name, code, amount, price, category, creationDate) VALUES (@name, @code, @amount, @price, @category, @creationDate)";
                     SqlCommand command = new SqlCommand(query, connection);
+                    // Asigna valores a los parámetros de la consulta SQL
                     command.Parameters.AddWithValue("@name", en.Name);
                     command.Parameters.AddWithValue("@code", en.Code);
                     command.Parameters.AddWithValue("@amount", en.Amount);
                     command.Parameters.AddWithValue("@price", en.Price);
                     command.Parameters.AddWithValue("@category", en.Category);
                     command.Parameters.AddWithValue("@creationDate", en.CreationDate);
+                    // Ejecuta la consulta y devuelve true si al menos una fila fue afectada
                     int rowsAffected = command.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
             }
+            // Captura excepciones de SQL y muestra el mensaje de error
             catch (SqlException ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
@@ -43,6 +47,7 @@ namespace library
             }
         }
 
+        // Método para actualizar un producto existente en la base de datos
         public bool Update(ENProduct en)
         {
             try
@@ -69,6 +74,7 @@ namespace library
             }
         }
 
+        // Método para eliminar un producto de la base de datos
         public bool Delete(ENProduct en)
         {
             try
@@ -90,6 +96,7 @@ namespace library
             }
         }
 
+        // Método para leer los detalles de un producto específico de la base de datos
         public bool Read(ENProduct en)
         {
             try
@@ -123,6 +130,7 @@ namespace library
             }
         }
 
+        // Métodos adicionales para leer el primer producto, el siguiente y el anterior
         public bool ReadFirst(ENProduct en)
         {
             try

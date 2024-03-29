@@ -8,6 +8,7 @@ namespace library
 {
     public class ENProduct
     {
+        // Atributos de la clase para representar los datos de un producto
         private string code;
         private string name;
         private int amount;
@@ -15,6 +16,7 @@ namespace library
         private int category;
         private DateTime creationDate;
 
+        // Propiedades públicas para acceder y establecer los valores de los atributos
         public string Code { get => code; set => code = value; }
         public string Name { get => name; set => name = value; }
         public int Amount { get => amount; set => amount = value; }
@@ -22,6 +24,7 @@ namespace library
         public int Category { get => category; set => category = value; }
         public DateTime CreationDate { get => creationDate; set => creationDate = value; }
 
+        // Constructores de la clase
         public ENProduct()
         {
             // Constructor sin parámetros
@@ -38,6 +41,7 @@ namespace library
             this.creationDate = creationDate;
         }
 
+        // Métodos para interactuar con la base de datos a través del controlador CADProduct
         public bool Create()
         {
             try
